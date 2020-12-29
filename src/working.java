@@ -14,6 +14,15 @@ class working
         System.out.println();
         System.out.println("*****************************************************************************************");
 
+        Items obj =  new Items();
+        Cart ShoppingList = new Cart();
+        Boolean flag = Boolean.TRUE;
+        obj.display();
+        while(flag)
+        {
+
+
+        }
         // list all items which is stored in class items
         // while loop to until confirm purchase
         // only the item id and how many instances of the item should be entered
