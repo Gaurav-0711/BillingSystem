@@ -7,6 +7,8 @@ class working
         InputStreamReader read = new InputStreamReader(System.in);
         BufferedReader in = new BufferedReader(read);
 
+        int productid,number;
+
         System.out.println("*********************************Mangalore Hypermarket***********************************");
         System.out.println("                          Urva Market , Chilimbi                                         ");
         System.out.println("                          Mangalore, Karnataka -575123   ");
@@ -18,8 +20,13 @@ class working
         Cart ShoppingList = new Cart();
         Boolean flag = Boolean.TRUE;
         obj.display();
+        System.out.println("Press -1 to exit");
         while(flag)
         {
+             System.out.println("Enter Product id and number of such itmes: ");
+             productid = Integer.parseInt(in.readLine());
+             number = Integer.parseInt(in.readLine());
+             // push into linked list
 
 
         }

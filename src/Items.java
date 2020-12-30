@@ -40,7 +40,7 @@ public class Items
     public void display()throws IOException
     {
         int i ;
-        for(i=0;i<8;i++)
+        for(i=0;i<30;i++)
         {
             System.out.println(product[i][0]+"\t"+product[i][1]+"\t\t\t"+product[i][2]);
         }
