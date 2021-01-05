@@ -27,13 +27,29 @@ public class Cart
 
         cur.next =  newNode;
         size++;
-        return;
+
 
 
     }
 
     public void remove_from_cart()
     {
+
+    }
+
+    public void displayCart()
+    {
+        if(head == null)
+        {
+              System.out.println("Cart is empty");
+              return;
+        }
+        Node cur = head;
+        while(cur.next!=null)
+        {
+            System.out.println(cur.productid+" "+object.product[cur.productid-101][1]+" "+cur.cost);
+            cur = cur.next;
+        }
 
     }
 
@@ -57,11 +73,5 @@ class Node
         next = null;
     }
 
-    Node(int productid,float cost,Node next)
-    {
-        this.productid = productid;
-        this.cost = cost;
-        this.next=next;
-    }
 
 }
