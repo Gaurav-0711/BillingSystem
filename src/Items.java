@@ -40,9 +40,15 @@ public class Items
     public void display()throws IOException
     {
         int i ;
+//        for(i=0;i<30;i++)
+//        {
+//            System.out.println(product[i][0]+"\t"+product[i][1]+"\t\t\t"+product[i][2]);
+//
+//        }
+        //Formatting the output
         for(i=0;i<30;i++)
         {
-            System.out.println(product[i][0]+"\t"+product[i][1]+"\t\t\t"+product[i][2]);
+            System.out.printf("%s  %-15s %s \n",product[i][0],product[i][1],product[i][2]);
         }
     }
     }
