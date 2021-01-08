@@ -32,9 +32,38 @@ public class Cart
 
     }
 
-    public void remove_from_cart()
+    public void remove_from_cart(int pid)
     {
-
+        if(head == null)
+        {
+            System.out.println("Cart is empty");
+            return;
+        }
+        Node cur = head,prev = null,del = null;
+        //del is used to store the deleted element to display it
+        // If product is at the front of the list
+        if(head.productid == pid) {
+            del = head;
+            head = head.next;
+        } else {
+            // If product is present anywhere other than the front of list
+            while(cur!=null)
+            {
+                if(cur.productid == pid ){
+                    prev.next = cur.next; // Delete node from list
+                    del = cur; // Save the deleted node for display
+                    cur = null;
+                    return;
+                }
+                prev = cur;
+                cur = cur.next;
+            }
+        }
+        if(del == null){
+            System.out.println("Product is not present in your cart");
+        } else {
+            System.out.println(object.product[del.productid-101][1] + " has been removed from your cart");
+        }
     }
 
     public void displayCart()
@@ -44,10 +73,12 @@ public class Cart
               System.out.println("Cart is empty");
               return;
         }
+        System.out.println("Your cart contains : ");
         Node cur = head;
-        while(cur.next!=null)
+        while(cur!=null)
         {
-            System.out.println(cur.productid+" "+object.product[cur.productid-101][1]+" "+cur.cost);
+            System.out.printf("%s  %-15s %s \n",cur.productid, object.product[cur.productid-101][1], cur.cost);
+            //System.out.println();
             cur = cur.next;
         }
 

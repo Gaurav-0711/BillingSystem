@@ -21,9 +21,20 @@ class working
         Boolean flag = Boolean.TRUE;
         obj.display();
        // System.out.println("Press -1 to exit");
+        //For testing purpose. Test code starts here
         product_id = 101;
         ShoppingList.add_to_cart(product_id);
+        int i = 1;
+        while(i<10){
+            ShoppingList.add_to_cart(product_id + i);
+            i++;
+        }
         ShoppingList.displayCart();
+        ShoppingList.remove_from_cart(103);
+        ShoppingList.remove_from_cart(106);
+        ShoppingList.remove_from_cart(101);
+        ShoppingList.displayCart();
+        // Testing code ends here
        /* while(!flag)
         {
              System.out.println("Enter Product id and number of such itmes: ");
