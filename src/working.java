@@ -23,10 +23,10 @@ class working
        // System.out.println("Press -1 to exit");
         //For testing purpose. Test code starts here
         product_id = 101;
-        ShoppingList.add_to_cart(product_id);
+        ShoppingList.add_to_cart(product_id,5);
         int i = 1;
         while(i<10){
-            ShoppingList.add_to_cart(product_id + i);
+            ShoppingList.add_to_cart(product_id + i,5);
             i++;
         }
         ShoppingList.displayCart();

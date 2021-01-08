@@ -10,10 +10,10 @@ public class Cart
         size = 0;
     }
     Items object = new Items();
-    public void add_to_cart(int pid)
+    public void add_to_cart(int pid,int n)
     {
         int price =  Integer.parseInt(object.product[pid-101][2]);
-        Node newNode = new Node(pid,price);
+        Node newNode = new Node(pid,price,n);
 
         if(head==null)
         {
@@ -68,6 +68,7 @@ public class Cart
 
     public void displayCart()
     {
+        System.out.println("*********************************************************************");
         if(head == null)
         {
               System.out.println("Cart is empty");
@@ -77,13 +78,35 @@ public class Cart
         Node cur = head;
         while(cur!=null)
         {
-            System.out.printf("%s  %-15s %s \n",cur.productid, object.product[cur.productid-101][1], cur.cost);
+            System.out.printf("%s  %-15s %s%-10d %.2f\n",cur.productid, object.product[cur.productid-101][1], cur.cost,cur.number_of_items,cur.price);
             //System.out.println();
             cur = cur.next;
-        }
 
+
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println("*********************************************************************");
+        System.out.println("The final amount is : Rs." + GetBill(head));
     }
 
+     public float GetBill(Node head)
+     {
+         float sum =0.0f;
+         if(head==null)
+             return 0.0f;
+         else
+         {
+             Node cur = head;
+             while(cur!=null)
+             {
+                 sum = sum+cur.price;
+                 cur=cur.next;
+             }
+             return sum;
+         }
+
+     }
     // create a linked list to store cart items
     //functions to add and delete items
     // function to print bill
@@ -93,15 +116,19 @@ public class Cart
 
 class Node
 {
+    int number_of_items;
+    float price;
     int productid;
     float cost;
     Node next;
 
-    Node(int productid,float cost)
+    Node(int productid,float cost,int number)
     {
         this.productid = productid;
         this.cost = cost;
         next = null;
+        number_of_items =  number;
+        price = number*cost;
     }
 
 
