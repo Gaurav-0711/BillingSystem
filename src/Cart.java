@@ -76,9 +76,10 @@ public class Cart
         }
         System.out.println("Your cart contains : ");
         Node cur = head;
+        System.out.printf("%s  %-15s %-10s  %-5s %4s\n","pid","Product name","Cost","Qty","Total");
         while(cur!=null)
         {
-            System.out.printf("%s  %-15s %s%-10d %.2f\n",cur.productid, object.product[cur.productid-101][1], cur.cost,cur.number_of_items,cur.price);
+            System.out.printf("%s  %-15s %-10s x %-5d %.2f\n",cur.productid, object.product[cur.productid-101][1], cur.cost,cur.number_of_items,cur.price);
             //System.out.println();
             cur = cur.next;
 
