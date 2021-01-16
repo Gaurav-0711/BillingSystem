@@ -12,6 +12,11 @@ public class Cart
     Items object = new Items();
     public void add_to_cart(int pid,int n)
     {
+        if(pid<101||pid>130)
+        {
+            System.out.println("Wrong producid");
+            return;
+        }
         int price =  Integer.parseInt(object.product[pid-101][2]);
         Node newNode = new Node(pid,price,n);
 
@@ -32,8 +37,10 @@ public class Cart
 
     }
 
-    public void remove_from_cart(int pid)
+    public void remove_from_cart(int pid,int number_of_instance)
     {
+
+
         if(head == null)
         {
             System.out.println("Cart is empty");
@@ -43,17 +50,34 @@ public class Cart
         //del is used to store the deleted element to display it
         // If product is at the front of the list
         if(head.productid == pid) {
-            del = head;
-            head = head.next;
-        } else {
+            if (head.number_of_items - number_of_instance <= 0) {
+                del = head;
+                head = head.next;
+                return;
+            } else {
+                head.number_of_items = head.number_of_items - number_of_instance;
+                return;
+            }
+        }
+
+            else {
             // If product is present anywhere other than the front of list
             while(cur!=null)
             {
-                if(cur.productid == pid ){
-                    prev.next = cur.next; // Delete node from list
-                    del = cur; // Save the deleted node for display
-                    cur = null;
-                    return;
+                if(cur.productid == pid ) {
+                    if ((cur.number_of_items - number_of_instance) <= 0)
+                    {
+
+                        prev.next = cur.next; // Delete node from list
+                        del = cur; // Save the deleted node for display
+                        cur = null;
+                        return;
+                    }
+                    else
+                        {
+                        cur.number_of_items = cur.number_of_items - number_of_instance;
+                        return;
+                       }
                 }
                 prev = cur;
                 cur = cur.next;
@@ -61,10 +85,9 @@ public class Cart
         }
         if(del == null){
             System.out.println("Product is not present in your cart");
-        } else {
-            System.out.println(object.product[del.productid-101][1] + " has been removed from your cart");
         }
-    }
+        }
+
 
     public void displayCart()
     {
