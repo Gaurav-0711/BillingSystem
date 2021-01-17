@@ -14,7 +14,7 @@ public class Cart
     {
         if(pid<101||pid>130)
         {
-            System.out.println("Wrong producid");
+            System.out.println("Wrong productid");
             return;
         }
         int price =  Integer.parseInt(object.product[pid-101][2]);

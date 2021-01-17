@@ -21,8 +21,7 @@ class working
 
         Items obj =  new Items();
         Cart ShoppingList = new Cart();
-        Boolean flag = Boolean.TRUE;
-
+        Boolean flag = Boolean.TRUE, input_error_flag = Boolean.TRUE;
         obj.display();
 
         while(flag)
@@ -33,42 +32,56 @@ class working
             System.out.println("2. Remove items from cart");
             System.out.println("3. Display Cart");
             System.out.println("  Anything else to proceed to checkout");
-
-            choice_of_customer= Integer.parseInt(in.readLine());
-            switch (choice_of_customer)
-            {
-
-                case 1: System.out.println("How many products do you want to enter");
-                        number_of_products = Integer.parseInt(in.readLine());
-                        for(int i=1;i<=number_of_products;i++)
-                        {
-                            System.out.print("Enter product if and number of items");
-                            product_id = Integer.parseInt(in.readLine());
-                            number = Integer.parseInt(in.readLine());
-                            ShoppingList.add_to_cart(product_id,number);
-                            System.out.println();
-                        }
-                        break;
-                case 2: System.out.println("How many products do you want to delete?");
-                        number_of_products =  Integer.parseInt(in.readLine());
-
-
-                         for(int i=1;i<=number_of_products;i++)
-                         {
-                             System.out.println("Enter product id and number of instances");
-                             product_id = Integer.parseInt(in.readLine());
-                             number = Integer.parseInt(in.readLine());
-                             ShoppingList.remove_from_cart(product_id,number);
-
-
-                         }
-                         break;
-                case 3: ShoppingList.displayCart();
-                         break;
-                default: flag = Boolean.FALSE;
-                          break;
-
+            try {
+                choice_of_customer = Integer.parseInt(in.readLine());
+            } catch (Exception E){
+                flag = Boolean.FALSE;
+                continue;
             }
+            input_error_flag = Boolean.FALSE;
+            do{
+                try{
+                    switch (choice_of_customer) {
+
+                        case 1:
+                            System.out.println("How many products do you want to enter?");
+                            number_of_products = Integer.parseInt(in.readLine());
+                            for (int i = 1; i <= number_of_products; i++) {
+                                System.out.println("Enter product id and required quantity ");
+                                product_id = Integer.parseInt(in.readLine());
+                                number = Integer.parseInt(in.readLine());
+                                ShoppingList.add_to_cart(product_id, number);
+                                System.out.println();
+                            }
+                            break;
+                        case 2:
+                            System.out.println("How many products do you want to delete?");
+                            number_of_products = Integer.parseInt(in.readLine());
+
+
+                            for (int i = 1; i <= number_of_products; i++) {
+                                System.out.println("Enter product id and number of instances to be removed");
+                                product_id = Integer.parseInt(in.readLine());
+                                number = Integer.parseInt(in.readLine());
+                                ShoppingList.remove_from_cart(product_id, number);
+
+
+                            }
+                            break;
+                        case 3:
+                            ShoppingList.displayCart();
+                            break;
+                        default:
+                            flag = Boolean.FALSE;
+                            break;
+
+                    }
+                    input_error_flag = Boolean.FALSE;
+                } catch (Exception E){
+                    System.out.println("Wrong Input. Try again");
+                    input_error_flag = Boolean.TRUE;
+                }
+            } while (input_error_flag);
 
         }
 
