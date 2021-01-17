@@ -1,6 +1,8 @@
 
 import java.io.*;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 class working
 {
@@ -10,7 +12,7 @@ class working
         BufferedReader in = new BufferedReader(read);
 
         int product_id,number;
-        int choice_of_customer,number_of_products;
+        int choice_of_customer,number_of_products,customer_id;
 
         System.out.println("*********************************Mangalore Hypermarket***********************************");
         System.out.println("                          Urva Market , Chilimbi                                         ");
@@ -84,9 +86,33 @@ class working
             } while (input_error_flag);
 
         }
+        File bill = new File("bill.txt");
+        bill.createNewFile();
+        File id_file = new File("customer_id.txt");
+        Scanner id_file_reader = new Scanner(id_file);
+        if(id_file_reader.hasNextInt()) {
+            customer_id = id_file_reader.nextInt();
+            //Read the customer id.
+        } else {
+            customer_id = 1000;
+        }
+        PrintWriter id_file_writer = new PrintWriter(id_file);
+        id_file_writer.format("%s\n", (customer_id + 1));
+        //Update and store the next customer id
+        id_file_reader.close();
+        id_file_writer.close();
 
-
+        System.out.println(customer_id);
+        FileWriter billWriter = new FileWriter("bill.txt",true);
+        billWriter.write("\n\n#########################################################################################\n\n\n");
+        billWriter.write("*********************************Mangalore Hypermarket***********************************\n");
+        billWriter.write("                          Urva Market , Chilimbi                                         \n");
+        billWriter.write("                          Mangalore, Karnataka -575123   \n\n\n");
+        billWriter.write("*****************************************************************************************\n");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm:ss");
+        billWriter.write("Customer id : " + customer_id + "\n" + dtf.format(LocalDateTime.now()) +"\n");
         ShoppingList.displayCart();
+        ShoppingList.printBill(billWriter);
         System.out.println();
         System.out.println();
         System.out.println();
@@ -95,6 +121,7 @@ class working
         System.out.println("2.UPI") ;
         System.out.println("3.Card");
         System.out.println("Enter your choice:");
+        billWriter.write("Mode of payment : ");
         choice_of_customer =Integer.parseInt(in.readLine());
         flag = Boolean.TRUE;
         do {
@@ -104,6 +131,7 @@ class working
             switch (choice_of_customer) {
                 case 1:
                     flag = Boolean.FALSE;
+                    billWriter.write("Cash\n");
                     break;
                 case 2:
                     System.out.println("Enter Mobile number");
@@ -116,9 +144,9 @@ class working
                     {
                         System.out.println("OTP has been sent to your registered mobile number");
                         flag = Boolean.FALSE;
+                        billWriter.write("UPI\n");
                     }
-                    else
-                    {
+                    else {
                         System.out.println("Wrong number entered , try again!");
                     }
                     break;
@@ -133,6 +161,7 @@ class working
                     {
                         System.out.println("OTP has been sent to your registered mobile number");
                         flag = Boolean.FALSE;
+                        billWriter.write("Card\n");
                     }
                     else
                     {
@@ -152,7 +181,10 @@ class working
         System.out.println("***************************************************");
         System.out.println("           Thank you for shopping with us ");
         System.out.println("****************************************************");
-
+        billWriter.write("*****************************************************************************************\n");
+        billWriter.write("           Thank you for shopping with us \n");
+        billWriter.write("*****************************************************************************************\n");
+        billWriter.close();
 
     }
 }

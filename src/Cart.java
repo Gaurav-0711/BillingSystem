@@ -1,3 +1,8 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Locale;
+
 public class Cart
 {
 
@@ -27,11 +32,14 @@ public class Cart
             return;
         }
         Node cur = head;
-        while(cur.next!=null)
+        while(cur.next!=null && cur.productid!=pid)
             cur = cur.next;
-
-        cur.next =  newNode;
-        size++;
+        if(cur.productid == pid){
+            cur.number_of_items += n;
+        } else {
+            cur.next = newNode;
+            size++;
+        }
 
 
 
@@ -130,6 +138,27 @@ public class Cart
              return sum;
          }
 
+     }
+     public void printBill(FileWriter billWriter) throws IOException {
+         billWriter.write("_________________________________________________________________________________________\n");
+         if(head == null)
+         {
+             billWriter.write("Cart is empty\n");
+             return;
+         }
+         billWriter.write("Your cart contains : \n");
+         Node cur = head;
+         billWriter.write(String.format("%s  %-15s %-10s  %-5s %4s\n","pid","Product name","Cost","Qty","Total"));
+         while(cur!=null)
+         {
+             billWriter.write(String.format("%s  %-15s %-10s x %-5d %.2f\n",cur.productid, object.product[cur.productid-101][1], cur.cost,cur.number_of_items,cur.price));
+             cur = cur.next;
+
+
+         }
+         billWriter.write(String.format("\n_________________________________________________________________________________________\n"));
+         billWriter.write(String.format("The final amount is : Rs." + GetBill(head) + "\n"));
+         billWriter.flush();
      }
     // create a linked list to store cart items
     //functions to add and delete items
